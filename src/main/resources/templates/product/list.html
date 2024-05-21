@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/static/css/templatemo.css}">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/templatemo.min.css">
+    <title>상품 목록</title>
+
+    <style>
+		@font-face {
+	    font-family: 'omyu_pretty';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+		}
+
+        /* 네모박스 스타일 설정 */
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 5px;
+            margin: auto;
+            max-width: 1340px;
+        }
+
+        .product-item {
+            width: calc(33% - 20px); /* 네모박스 간격 포함하여 너비 설정 */
+            height : 400px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            margin-right: 15px;
+        }
+
+        .product-item li {
+            list-style: none;
+        }
+
+		.product-item #text {
+			font-family: 'omyu_pretty';
+			font-size : 13px;
+            margin : 10px
+        }
+
+        .product-item img {
+            width: 70%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+	    .product-content {
+	    	font-size: 18px;
+	    	flex-grow: 0.5; /* 내용이 남은 공간을 모두 차지하도록 설정합니다. */
+	        width: 45%;
+	        height: 100%;
+	        margin-top: 5px;
+	        margin-bottom: 20px;
+	        padding: 10px;
+	        border: 1px solid #BDBDBD;
+	        border-radius: 5px;
+	        text-align: left;
+	        background-color: #FFFFFF;
+	    }
+
+	    .product-img {
+		    flex: 0 0 100px; /* 이미지 너비를 고정합니다. */
+		    max-width: 100%; /* 이미지의 최대 너비를 설정하여 유연한 크기 조정 */
+		    height: auto; /* 이미지의 높이를 자동으로 조정하여 가로세로 비율 유지. */
+		}
+
+	    #Product_Quantity{
+	    	width: 150px;
+	    	height: 30px;
+	    	font-size: 15px;
+	    }
+
+	    #cartbtn, #orderbtn{
+	    	font-size: 12px;
+	    	margin-bottom: 13px;
+	        margin-left: 10px;
+	        border: 1px solid #BDBDBD;
+	     	width: 150px;
+	     	height: 50px;
+	     	background-color: #E6EEF6;
+	    }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+        <div class="container text-light">
+            <div class="w-100 d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-envelope mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@company.com">com@test.com</a>
+                    <i class="fa fa-phone mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-xxxx-xxxx</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Close Top Nav -->
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-success logo h1 align-self-center"  th:href="@{/product/list}">
+                AI_Shop
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/product/list}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/product/list}">본체</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/product/list}">모니터</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/product/list}">키보드</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/product/list}">마우스</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="navbar align-self-center d-flex">
+                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                            <div class="input-group-text">
+                                <i class="fa fa-fw fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!--     <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                           <i class="fa fa-fw fa-search text-dark mr-2"></i>
+                       </a>  -->
+                    <b>김철수님 /  </b>
+                    <a class="nav-icon position-relative text-decoration-none" th:href="@{/product/list}">
+                        <b>로그아웃 </b>
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" th:href="@{/product/list}">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" th:href="@{/product/list}">
+                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" th:href="@{/product/list}">
+                        <i class="fa fa-fw fa-shopping-cart text-dark mr-3"></i>
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+
+
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <br>
+    <p></p><br>
+    <div class="product-container">
+        <div class="product-item" th:each="product : ${productList}" th:onclick="javascript:moveDetail([[${product.sellerProductId}]])" style="cursor:pointer;">
+            <p><img th:src="@{/static/img/{image}(image=${product.image})}" alt="등록상품"></p>
+            <p id = "text" th:text="${product.sellerProductName}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></p>
+            <p id = "text1" th:text="${#numbers.formatInteger(product.salePrice, 3, 'COMMA')}"></p>
+        </div>
+    </div>
+
+    <script>
+        function moveDetail(id){
+            location.href = `/product/detail/${id}`
+        }
+    </script>
+</body>
+</html>

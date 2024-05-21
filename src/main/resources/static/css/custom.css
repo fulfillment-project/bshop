@@ -1,0 +1,36 @@
+/*
+Custom Css
+*/
+	.inputbtn {
+		cursor:pointer;
+		padding-bottom: 5px;
+		padding-top: 3px;
+		padding-left: 10px;
+		padding-right: 10px;
+		font-weight: bold;
+		border:1px solid gray;
+		background-color:#fff6f6;
+		font-size: 14px;
+	}
+	
+		table {
+		background-color: white;
+		border-collapse: collapse;
+		width: 800px;
+	}
+	th {
+		padding: 8px;
+		border-top :2px solid #ddd;
+		border-bottom :2px solid #ddd;
+		background-color: sky;
+		border-collapse: collapse;
+	}
+	td {
+		border-bottom :1px solid #ddd;
+		border-collapse: collapse;
+		padding: 8px;
+		text-align: center;
+		overflow: hidden; 
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
