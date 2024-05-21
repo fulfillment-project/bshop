@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponseDTO selectOne(Long sellerProductId) throws Exception {
         Product productDate = this.productRepository.findById(sellerProductId).orElseThrow();
-        ProductResponseDTO product = ProductResponseDTO.ProductFactory(productDate);
+        ProductResponseDTO product = ProductResponseDTO.ProductFactory(productDate, "local");
         return product;
     }
 
@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
             productList = this.productRepository.findByVendorId(productRequestDTO.getVendorId());
         }
         return productList.stream().map(product ->
-                ProductResponseDTO.ProductFactory(product)
+                ProductResponseDTO.ProductFactory(product, "rest")
         ).collect(Collectors.toList());
     }
 
@@ -79,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductResponseDTO> selectProductList() throws Exception {
         List<Product> productList = this.productRepository.findAll();
         return productList.stream().map(product ->
-                ProductResponseDTO.ProductFactory(product)
+                ProductResponseDTO.ProductFactory(product, "local")
         ).collect(Collectors.toList());
     }
 

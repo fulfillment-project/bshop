@@ -36,7 +36,7 @@ public class ProductApiController {
 
     //상품 전체 조회
     @PostMapping("/select/seller-products")
-    public ResponseEntity<Map<String, Object>> selectProductList(@RequestBody ProductRequestDTO product) throws Exception {
+    public ResponseEntity<Map<String, Object>> selectProductList(@RequestBody(required = false) ProductRequestDTO product) throws Exception {
         List<ProductResponseDTO> productList = this.productService.selectList(product);
         Map<String, Object> map = new HashMap<>();
         map.put("code", "SUCCESS");

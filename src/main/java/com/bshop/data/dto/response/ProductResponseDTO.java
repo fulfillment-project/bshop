@@ -24,7 +24,7 @@ public class ProductResponseDTO {
     private String insertDateTime;
     private String updateDateTime;
 
-    public ProductResponseDTO fromProduct(Product product) {
+    public ProductResponseDTO fromProduct(Product product, String rest) {
         this.sellerProductId = product.getSellerProductId();
         this.sellerProductName = product.getSellerProductName();
         this.content = product.getContent();
@@ -32,16 +32,16 @@ public class ProductResponseDTO {
         this.salePrice = product.getSalePrice();
         this.quantity = product.getQuantity();
         this.brand = product.getBrand();
-        this.image = MethodUtil.changeImageUrl("http://localhost:9080/", "static/img/",product.getImage());
+        this.image = MethodUtil.changeImageUrl(rest,"http://localhost:9090/", "static/img/",product.getImage());
         this.deliveryCharge = product.getDeliveryCharge();
         this.insertDateTime = MethodUtil.ChangeDateToString(product.getInsertDateTime());
         this.updateDateTime = MethodUtil.ChangeDateToString(product.getUpdateDateTime());
         return this;
     }
 
-    public static ProductResponseDTO ProductFactory(Product product) {
+    public static ProductResponseDTO ProductFactory(Product product, String rest) {
         ProductResponseDTO productResponseDTO = new ProductResponseDTO();
-        productResponseDTO.fromProduct(product);
+        productResponseDTO.fromProduct(product, rest);
         return productResponseDTO;
     }
 }

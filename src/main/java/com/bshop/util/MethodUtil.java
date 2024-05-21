@@ -10,7 +10,11 @@ public class MethodUtil {
         return dateTimeFormatter.format(date);
     }
 
-    public static String changeImageUrl(String url, String folder, String image){
-        return url + folder + image;
+    public static String changeImageUrl(String rest, String url, String folder, String image){
+        if(rest.equals("rest")){
+            return url + folder + image;
+        } else {
+            return image;
+        }
     }
 }
