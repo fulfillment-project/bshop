@@ -37,31 +37,31 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductResponseDTO> selectList(ProductRequestDTO productRequestDTO) throws Exception {
-        String fromDate = productRequestDTO.getFromDate();
-        String toDate = productRequestDTO.getToDate();
-        LocalDateTime fromDateTime = null;
-        LocalDateTime toDateTime = null;
+//        String fromDate = productRequestDTO.getFromDate();
+//        String toDate = productRequestDTO.getToDate();
+//        LocalDateTime fromDateTime = null;
+//        LocalDateTime toDateTime = null;
+//
+//        if(fromDate != null && !fromDate.isEmpty()) {
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//            fromDateTime = LocalDateTime.parse(fromDate + " 00:00:00", formatter);
+//            toDateTime = LocalDateTime.parse(toDate + " 23:59:59", formatter);
+//        }
+//
+//        System.out.println(fromDate);
+//        System.out.println(fromDateTime);
 
-        if(fromDate != null && !fromDate.isEmpty()) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            fromDateTime = LocalDateTime.parse(fromDate + " 00:00:00", formatter);
-            toDateTime = LocalDateTime.parse(toDate + " 23:59:59", formatter);
-        }
+        List<Product> productList = this.productRepository.findByVendorId(productRequestDTO.getVendorId());;
 
-        System.out.println(fromDate);
-        System.out.println(fromDateTime);
-
-        List<Product> productList = null;
-
-        if(productRequestDTO.getFromDate() != null && !productRequestDTO.getFromDate().isEmpty()) {
-            if(productRequestDTO.getKeyword() != null && !productRequestDTO.getKeyword().trim().isEmpty()){
-                productList = this.productRepository.findByVendorIdAndSellerProductNameAndInsertDateTimeBetween(productRequestDTO.getVendorId(), productRequestDTO.getKeyword().trim(),fromDateTime, toDateTime);
-            } else {
-                productList = this.productRepository.findByVendorIdAndInsertDateTimeBetween(productRequestDTO.getVendorId(), fromDateTime, toDateTime);
-            }
-        } else {
-            productList = this.productRepository.findByVendorId(productRequestDTO.getVendorId());
-        }
+//        if(productRequestDTO.getFromDate() != null && !productRequestDTO.getFromDate().isEmpty()) {
+//            if(productRequestDTO.getKeyword() != null && !productRequestDTO.getKeyword().trim().isEmpty()){
+//                productList = this.productRepository.findByVendorIdAndSellerProductNameAndInsertDateTimeBetween(productRequestDTO.getVendorId(), productRequestDTO.getKeyword().trim(),fromDateTime, toDateTime);
+//            } else {
+//                productList = this.productRepository.findByVendorIdAndInsertDateTimeBetween(productRequestDTO.getVendorId(), fromDateTime, toDateTime);
+//            }
+//        } else {
+//
+//        }
         return productList.stream().map(product ->
                 ProductResponseDTO.ProductFactory(product, "rest")
         ).collect(Collectors.toList());
@@ -100,8 +100,16 @@ public class ProductServiceImpl implements ProductService {
                 .address(orderRequestDTO.getAddress())
                 .addressDetail(orderRequestDTO.getAddressDetail())
                 .memo(orderRequestDTO.getMemo())
+                .orderCheck("F")
                 .deliveryStatus("상품 준비 중")
                 .build();
         this.shopOrderRepository.save(order);
+    }
+
+    @Override
+    public void changeConnectType(Long sellerProductId) throws Exception {
+        Product product = this.productRepository.findById(sellerProductId).orElseThrow();
+        product.setConnectCheck("T");
+        this.productRepository.save(product);
     }
 }

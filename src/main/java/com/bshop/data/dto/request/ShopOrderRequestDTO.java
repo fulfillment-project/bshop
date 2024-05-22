@@ -26,4 +26,5 @@ public class ShopOrderRequestDTO {
     private String deliveryStatus;
     private String fromDate;
     private String toDate;
+    private String orderCheck = "F";
 }

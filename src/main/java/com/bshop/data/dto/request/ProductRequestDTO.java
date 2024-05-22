@@ -14,4 +14,5 @@ public class ProductRequestDTO {
     private String fromDate;
     private String toDate;
     private String keyword;
+    private String connectCheck = "F";
 }

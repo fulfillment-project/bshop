@@ -58,4 +58,16 @@ public class ProductApiController {
 
         return ResponseEntity.ok().body(map);
     }
+
+    //상품 연동 시 연동여부 변경
+    @PutMapping("/update/seller-products/change-connect/{sellerProductId}")
+    public ResponseEntity<Map<String, Object>> changeConnectType(@PathVariable Long sellerProductId) throws Exception{
+        this.productService.changeConnectType(sellerProductId);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", "SUCCESS");
+        map.put("message", "연동 완료되었습니다.");
+
+        return ResponseEntity.ok().body(map);
+    }
 }

@@ -24,13 +24,13 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 
     @Override
     public List<ShopOrderResponseDTO> sellerSelectOrderList(ShopOrderRequestDTO orderRequestDTO) throws Exception {
-        String fromDate = orderRequestDTO.getFromDate();
-        String toDate = orderRequestDTO.getToDate();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime fromDateTime = LocalDateTime.parse(fromDate + " 00:00:00", formatter);
-        LocalDateTime toDateTime = LocalDateTime.parse(toDate + " 23:59:59", formatter);
+//        String fromDate = orderRequestDTO.getFromDate();
+//        String toDate = orderRequestDTO.getToDate();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        LocalDateTime fromDateTime = LocalDateTime.parse(fromDate + " 00:00:00", formatter);
+//        LocalDateTime toDateTime = LocalDateTime.parse(toDate + " 23:59:59", formatter);
 
-        List<ShopOrder> orderList = this.shopOrderRepository.findByVendorIdAndUpdateDateTimeBetween(orderRequestDTO.getVendorId(), fromDateTime, toDateTime);
+        List<ShopOrder> orderList = this.shopOrderRepository.findByVendorIdAndUpdateDateTimeBetween(orderRequestDTO.getVendorId());
         System.out.println(orderList.size());
         return orderList.stream().map(order ->
                 ShopOrderResponseDTO.OrderFactory(order)

@@ -18,6 +18,9 @@ public interface ProductService {
     public List<ProductResponseDTO> selectProductList() throws Exception;
 
     //상품 구매하기
-    public void purchaseProduct(@PathVariable Long sellerProductId, ShopOrderRequestDTO orderRequestDTO) throws Exception;
+    public void purchaseProduct(Long sellerProductId, ShopOrderRequestDTO orderRequestDTO) throws Exception;
+
+    //상품 연동 시 연동여부 변경
+    public void changeConnectType(Long sellerProductId) throws Exception;
 
 }

@@ -45,4 +45,6 @@ public class ShopOrder extends BaseEntity{
     private String trakingNumber;
 
     private String deliveryStatus;
+
+    private String orderCheck;
 }
