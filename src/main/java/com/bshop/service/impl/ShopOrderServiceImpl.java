@@ -42,7 +42,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 
     @Override
     public void trakingNumberUpdate(ShopOrderRequestDTO order) throws Exception {
-        ShopOrder orderDate = this.shopOrderRepository.findById(order.getOrderId()).orElseThrow();
+        ShopOrder orderDate = this.shopOrderRepository.findByOrderId(order.getOrderId());
         orderDate.setTrakingNumber(order.getTrakingNumber());
         this.shopOrderRepository.save(orderDate);
     }

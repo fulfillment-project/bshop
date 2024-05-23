@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ShopOrderRequestDTO {
-    private Long orderId;
+    private Integer orderId;
     private Integer vendorId;
     private String trakingNumber;
     private Long sellerProductId;

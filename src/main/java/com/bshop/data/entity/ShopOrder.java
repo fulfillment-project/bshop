@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class ShopOrder extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    private Integer orderId;
 
     private Integer vendorId;
 

@@ -32,7 +32,7 @@ public class ShopOrderApiController {
     }
 
     @PutMapping("/{orderId}/orders/invoices")
-    public ResponseEntity<Map<String, Object>> trakingNumberUpdate(@PathVariable Long orderId, @RequestBody ShopOrderRequestDTO orderRequestDTO) throws Exception{
+    public ResponseEntity<Map<String, Object>> trakingNumberUpdate(@PathVariable Integer orderId, @RequestBody ShopOrderRequestDTO orderRequestDTO) throws Exception{
         orderRequestDTO.setOrderId(orderId);
         this.orderService.trakingNumberUpdate(orderRequestDTO);
 

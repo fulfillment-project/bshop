@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ShopOrderResponseDTO {
-    private Long orderId;
+    private Integer orderId;
     private Long sellerProductId;
     private String sellerProductName;
     private Integer customId;
