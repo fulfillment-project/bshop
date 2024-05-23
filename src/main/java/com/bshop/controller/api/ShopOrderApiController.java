@@ -19,9 +19,8 @@ public class ShopOrderApiController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/{vendorId}/ordersheets")
-    public ResponseEntity<Map<String, Object>> sellerSelectOrderList(@PathVariable Integer vendorId, @RequestBody ShopOrderRequestDTO orderRequestDTO) throws Exception {
-        orderRequestDTO.setVendorId(vendorId);
+    @PostMapping("/ordersheets")
+    public ResponseEntity<Map<String, Object>> sellerSelectOrderList(@RequestBody ShopOrderRequestDTO orderRequestDTO) throws Exception {
         List<ShopOrderResponseDTO> orderList = this.orderService.sellerSelectOrderList(orderRequestDTO);
 
         Map<String, Object> map = new HashMap<>();
